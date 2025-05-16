@@ -20,7 +20,7 @@ This project is an end-to-end machine learning and deep learning pipeline design
 - [Folder Structure](#folder-structure)
 - [Testing](#testing)
 - [Docker Support](#docker-support)
-- [CI/CD Support](#ci/cd-support)
+- [CI/CD Support](#cicd-support)
 
 ---
 
