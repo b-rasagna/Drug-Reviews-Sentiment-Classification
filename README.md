@@ -19,6 +19,7 @@ This project is an end-to-end machine learning and deep learning pipeline design
 - [API Reference](#api-reference)
 - [Folder Structure](#folder-structure)
 - [Testing](#testing)
+- [Docker Support](#docker-support)
 
 ---
 
@@ -228,5 +229,62 @@ Unit tests include:
 * API endpoint coverage
 * Text cleaning logic
 * Model loading
+
+---
+
+## Docker Support
+
+You can build and run the application using Docker with a single command.
+
+### Prerequisites
+
+* [Docker](https://docs.docker.com/get-docker/) must be installed and running.
+* Ensure your user is part of the `docker` group to avoid using `sudo`:
+
+  ```bash
+  sudo usermod -aG docker $USER
+  newgrp docker
+  ```
+
+---
+
+### 1. Add `.env` File
+
+Make sure your project root contains a `.env` file like this:
+
+```env
+JWT_SECRET=your_jwt_secret_key
+JWT_ALGORITHM=HS256
+```
+
+---
+
+### 2. Build the Docker Image
+
+```bash
+docker build -t drug-review-app .
+```
+
+---
+
+### 3. Run the Container
+
+```bash
+docker run --env-file .env -p 8000:8000 -p 8501:8501 drug-review-app
+```
+
+* FastAPI API: [http://localhost:8000](http://localhost:8000)
+* Streamlit App: [http://localhost:8501](http://localhost:8501)
+
+---
+
+### One-Liner Script
+
+You can also use the helper script:
+
+```bash
+chmod +x docker_run.sh
+./docker_run.sh
+```
 
 ---
