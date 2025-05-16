@@ -20,6 +20,7 @@ This project is an end-to-end machine learning and deep learning pipeline design
 - [Folder Structure](#folder-structure)
 - [Testing](#testing)
 - [Docker Support](#docker-support)
+- [CI/CD Support](#ci/cd-support)
 
 ---
 
@@ -286,5 +287,34 @@ You can also use the helper script:
 chmod +x docker_run.sh
 ./docker_run.sh
 ```
+
+---
+
+## CI/CD Support
+
+### Continuous Integration (CI)
+
+This project includes GitHub Actions CI workflow:
+
+* Linting using `flake8`
+* Unit testing using `pytest`
+* Dependency installation from `requirements.txt`
+
+The CI workflow automatically runs on every push and pull request to the `main` branch.
+CI configuration is defined in:
+
+```
+.github/workflows/python-app.yml
+```
+
+---
+
+### Continuous Deployment (CD)
+
+While CD is not set up by default, we can extend this project with **Docker-based deployment**:
+
+* Containerize the app using the provided `Dockerfile`
+* Use services like **GitHub Actions + DockerHub**, **GitLab CI/CD**, or **AWS/GCP Cloud Build** to push containers
+* Deploy to **cloud platforms** (e.g., AWS ECS, GCP Cloud Run, Heroku) or **Kubernetes clusters**
 
 ---
