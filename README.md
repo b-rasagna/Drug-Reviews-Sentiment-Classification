@@ -80,6 +80,18 @@ The pipeline consists of two phases:
 - pip
 - Linux/macOS or WSL (Windows Subsystem for Linux)
 
+### .env Setup
+
+Before running the app, create a `.env` file in the root directory and add your JWT secret:
+
+```env
+JWT_SECRET=your_super_secret_key
+JWT_ALGORITHM=HS256
+```
+
+* `JWT_SECRET` is used to sign and verify JWT tokens. Use a strong, random string.
+* `JWT_ALGORITHM` defaults to `HS256` if not specified (optional).
+
 ### Quick Start
 
 ```bash
