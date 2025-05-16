@@ -84,10 +84,10 @@ The pipeline consists of two phases:
 
 ### .env Setup
 
-Before running the app, create a `.env` file in the root directory and add your JWT secret:
+Before running the app, create a `.env` file in the root directory and add JWT secret:
 
 ```env
-JWT_SECRET=your_super_secret_key
+JWT_SECRET=super_secret_key
 JWT_ALGORITHM=HS256
 ```
 
@@ -235,12 +235,12 @@ Unit tests include:
 
 ## Docker Support
 
-You can build and run the application using Docker with a single command.
+Application can be built and served using Docker with a single command.
 
 ### Prerequisites
 
 * [Docker](https://docs.docker.com/get-docker/) must be installed and running.
-* Ensure your user is part of the `docker` group to avoid using `sudo`:
+* Ensure user is part of the `docker` group to avoid using `sudo`:
 
   ```bash
   sudo usermod -aG docker $USER
@@ -251,10 +251,10 @@ You can build and run the application using Docker with a single command.
 
 ### 1. Add `.env` File
 
-Make sure your project root contains a `.env` file like this:
+Make sure project root contains a `.env` file like this:
 
 ```env
-JWT_SECRET=your_jwt_secret_key
+JWT_SECRET=jwt_secret_key
 JWT_ALGORITHM=HS256
 ```
 
@@ -281,7 +281,7 @@ docker run --env-file .env -p 8000:8000 -p 8501:8501 drug-review-app
 
 ### One-Liner Script
 
-You can also use the helper script:
+Helper script can also be used:
 
 ```bash
 chmod +x docker_run.sh
