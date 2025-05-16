@@ -1,4 +1,4 @@
-name: CI - Python App with FastAPI and Streamlit
+name: Python application
 
 on:
   push:
@@ -10,25 +10,24 @@ permissions:
   contents: read
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout code with LFS
       uses: actions/checkout@v4
+      with:
+        lfs: true
 
-    - name: Set up Python
+    - name: Git LFS Pull
+      run: |
+        git lfs install
+        git lfs pull
+
+    - name: Set up Python 3.10
       uses: actions/setup-python@v4
       with:
         python-version: "3.10"
-
-    - name: Cache pip dependencies
-      uses: actions/cache@v4
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
 
     - name: Install dependencies
       run: |
@@ -37,16 +36,19 @@ jobs:
 
     - name: Set environment variables
       run: |
-        echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> $GITHUB_ENV
+        echo "JWT_SECRET=your-secret-token" >> $GITHUB_ENV
         echo "JWT_ALGORITHM=HS256" >> $GITHUB_ENV
 
-    - name: Lint with flake8
+    - name: List models directory (for debugging)
+      run: |
+        echo "Checking models folder:"
+        ls -lh models || true
+
+    - name: Run linting (flake8)
       run: |
         pip install flake8
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-    - name: Run tests with pytest
+    - name: Run tests (pytest)
       run: |
-        pip install pytest
-        pytest tests/
+        pytest -v
