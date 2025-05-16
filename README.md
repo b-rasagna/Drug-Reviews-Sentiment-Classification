@@ -57,20 +57,29 @@ The system allows users to:
 
 ## End-to-End Pipeline
 
-The pipeline consists of two phases:
+The complete system consists of two core phases, designed to deliver a robust end-to-end machine learning solution:
 
-### 1. Notebook Phase
+---
 
-- Conducts EDA and preprocessing
-- Trains 10 models (ML and DL)
-- Applies SMOTE and class weights to handle imbalance
-- Saves models, vectorizers, encoders, and tokenizers in the `models/` directory
+### 1. Notebook Phase - Data Exploration, Model Training & Artifact Preparation
 
-### 2. Application Phase
+* Conducts thorough Exploratory Data Analysis (EDA) and preprocessing on the drug reviews dataset to identify trends, clean data, and prepare features.
+* Trains **10 distinct models**, spanning classical Machine Learning algorithms (e.g., Random Forest, Logistic Regression) and Deep Learning architectures (e.g., Bi-LSTM + CNN).
+* Implements strategies such as **SMOTE** for oversampling minority classes and **class weighting** to mitigate data imbalance and improve model generalization.
+* Saves all trained models and essential preprocessing artifacts—including vectorizers, encoders, and tokenizers—into a centralized `models/` directory for streamlined loading during inference.
 
-- The FastAPI app loads selected models on demand
-- Tokenizers and vectorizers are reused without retraining
-- Sentiment predictions are made on cleaned input reviews
+---
+
+### 2. Application Phase — Model Deployment & Real-Time Prediction
+
+* A FastAPI backend dynamically loads the selected model upon client requests, optimizing memory use and enabling easy model switching without downtime.
+* Preprocessing tools like tokenizers and vectorizers are reused as-is, ensuring consistency between training and inference data processing.
+* Provides secure, JWT-authenticated API endpoints for model selection and sentiment prediction on user-provided drug reviews.
+* Integrates with a Streamlit frontend that allows users to authenticate, select models, enter reviews, and view predicted sentiment in real-time.
+
+---
+
+This modular two-phase approach enables efficient model development, management, and deployment, supporting a scalable and maintainable sentiment classification system.
 
 ---
 
